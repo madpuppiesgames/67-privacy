@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account & Data Deletion — 67 Runner</title>
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One&family=Permanent+Marker&family=Russo+One&family=Rubik+Glitch&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; background:#070613; color:rgba(255,255,255,.82); font:18px/1.7 'Russo One', sans-serif; overflow-x:hidden; }
+  a { color:#00E5FF; text-decoration:none; }
+  a:hover { color:#FFE033; }
+
+  .nav { position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px 48px; background:rgba(7,6,19,.92); border-bottom:2px solid rgba(255,224,51,.25); backdrop-filter:blur(8px); }
+  .nav-logo a { display:flex; align-items:center; gap:14px; }
+  .nav-67 { font-family:'Rubik Glitch'; font-size:38px; line-height:1; color:#fff; text-shadow:3px 3px 0 #000; }
+  .nav-name { font-family:'Bebas Neue'; font-size:24px; letter-spacing:4px; color:rgba(255,255,255,.7); }
+
+  .wrap { position:relative; max-width:900px; margin:0 auto; padding:80px 24px 120px; }
+  .wm { position:fixed; bottom:-120px; left:0; right:0; text-align:center; font-family:'Rubik Glitch'; font-size:560px; line-height:1; color:rgba(255,26,108,.04); pointer-events:none; z-index:0; }
+
+  .head { position:relative; text-align:center; margin-bottom:70px; z-index:1; }
+  .head .sticker { display:inline-block; font-family:'Permanent Marker'; font-size:34px; color:#fff; background:#FF1A6C; padding:6px 28px; transform:rotate(-2.4deg); box-shadow:6px 6px 0 rgba(0,0,0,.6); }
+  .head h1 { font-family:'Changa One'; font-size:58px; font-weight:400; color:#fff; margin:24px 0 10px; text-shadow:5px 5px 0 #000; }
+  .head .updated { display:inline-block; font-family:'Russo One'; font-size:16px; letter-spacing:2px; color:#FFE033; background:#060820; border:2px solid rgba(255,224,51,.5); border-radius:6px 14px 14px 6px; padding:6px 20px; transform:rotate(1.2deg); box-shadow:4px 4px 0 rgba(0,0,0,.55); }
+
+  .intro { position:relative; background:rgba(6,8,32,.92); border:3px solid rgba(255,26,108,.4); border-left:14px solid #FF1A6C; border-radius:10px 30px 30px 14px; padding:34px 40px; transform:rotate(-.5deg); box-shadow:10px 10px 0 rgba(0,0,0,.6); margin-bottom:60px; z-index:1; }
+  .intro p { margin:0; }
+
+  section { position:relative; z-index:1; margin-bottom:44px; }
+  section h2 { display:flex; align-items:baseline; gap:18px; font-family:'Bebas Neue'; font-size:36px; font-weight:400; letter-spacing:3px; color:#fff; margin:0 0 16px; }
+  section h2 .num { font-family:'Changa One'; font-size:44px; color:#FF1A6C; text-shadow:3px 3px 0 #000; transform:rotate(-2deg); }
+  section:nth-of-type(even) h2 .num { color:#00E5FF; }
+  section p { margin:0 0 14px; }
+  section ul { margin:0 0 14px; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
+  section li { background:rgba(6,8,32,.85); border:2px solid rgba(255,255,255,.15); border-left:8px solid rgba(255,224,51,.6); border-radius:6px 16px 16px 8px; padding:14px 20px; box-shadow:5px 5px 0 rgba(0,0,0,.5); }
+  strong { color:#fff; }
+  code { font-family:monospace; font-size:16px; color:#FFE033; background:#060820; border:1px solid rgba(255,224,51,.35); border-radius:4px 10px 10px 4px; padding:2px 8px; }
+
+  /* email CTA card */
+  .cta-card { position:relative; text-align:center; background:rgba(6,8,32,.92); border:3px solid rgba(0,229,255,.45); border-left:14px solid #00E5FF; border-radius:10px 30px 30px 14px; padding:40px; transform:rotate(.4deg); box-shadow:10px 10px 0 rgba(0,0,0,.6); margin:60px 0 0; z-index:1; }
+  .cta-card .tag { position:absolute; top:-26px; left:34px; font-family:'Permanent Marker'; font-size:26px; color:#070613; background:#00E5FF; padding:5px 20px; transform:rotate(-2deg); box-shadow:5px 5px 0 rgba(0,0,0,.6); }
+  .cta-card a.mail { display:inline-block; font-family:'Bebas Neue'; font-size:34px; letter-spacing:3px; color:#070613; background:#FFE033; border:3px solid #FFE033; border-radius:10px 22px 22px 12px; padding:16px 44px; transform:rotate(-.8deg); box-shadow:8px 8px 0 rgba(0,0,0,.6); }
+  .cta-card a.mail:hover { background:#fff; border-color:#fff; }
+  .cta-card .hint { font-family:'Russo One'; font-size:16px; letter-spacing:2px; color:rgba(255,255,255,.5); margin-top:18px; }
+
+  .foot { position:relative; text-align:center; margin-top:70px; z-index:1; }
+  .foot .meme { font-family:'Permanent Marker'; font-size:26px; color:rgba(255,255,255,.35); transform:rotate(-1.4deg); }
+
+  @media (max-width: 640px) {
+    .head h1 { font-size:38px; }
+    .nav { padding:14px 20px; }
+    .wrap { padding-top:50px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wm" aria-hidden="true">67</div>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <a href="index.html"><span class="nav-67">67</span><span class="nav-name">67 RUNNER</span></a>
+  </div>
+  <a href="index.html" style="font-family:'Bebas Neue'; font-size:22px; letter-spacing:3px;">‹ BACK TO GAME</a>
+</nav>
+
+<div class="wrap">
+
+  <header class="head">
+    <div class="sticker">LEAVING THE COURT?</div>
+    <h1>ACCOUNT &amp; DATA DELETION</h1>
+    <div class="updated">APP: 67 RUNNER · DEVELOPER: MAD PUPPIES · LAST UPDATED: 16 JULY 2026</div>
+  </header>
+
+  <div class="intro">
+    <p>This page explains how to request deletion of your account data associated with
+    the game <strong>67 Runner</strong> (package <code>com.runner67</code>).</p>
+  </div>
+
+  <section>
+    <h2><span class="num">1</span> HOW TO REQUEST DELETION</h2>
+    <p>Email <a href="/cdn-cgi/l/email-protection#ed808c899d989d9d84889e8a8c80889ead8a808c8481c38e8280"><span class="__cf_email__" data-cfemail="7914181d090c0909101c0a1e18141c0a391e14181015571a1614">[email&#160;protected]</span></a> with:</p>
+    <ul>
+      <li>Subject line: <strong>Delete my 67 Runner data</strong></li>
+      <li>Your in-game <strong>display name</strong> (the nickname shown on the leaderboard), and</li>
+      <li>if available, your <strong>Google Play Games account</strong> used to sign in.</li>
+    </ul>
+    <p>We use this information to locate and remove your leaderboard entry. We will
+    confirm by email once the deletion is complete.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span> WHAT DATA IS DELETED</h2>
+    <p>On request, we delete all account data we hold about you, namely:</p>
+    <ul>
+      <li>Your display name (nickname)</li>
+      <li>Your submitted scores / distances</li>
+      <li>Your player identifiers (random player ID and Google Play Games ID)</li>
+      <li>Any cloud-saved game progress stored through Google Play Games Saved Games</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span> WHAT DATA IS RETAINED</h2>
+    <p>We do not retain personal account data after deletion. Anonymous, aggregated
+    records that cannot identify you may remain. Residual copies in encrypted backups
+    are purged on our normal backup rotation within <strong>90 days</strong>.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span> DELETION TIMEFRAME</h2>
+    <p>Requests are processed within <strong>30 days</strong> of receipt.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span> DELETING LOCAL DATA YOURSELF</h2>
+    <p>Game progress and settings stored on your device are removed immediately when you
+    uninstall the app or clear its data in your device settings.</p>
+  </section>
+
+  <div class="cta-card">
+    <div class="tag">CONTACT</div>
+    <a class="mail" href="/cdn-cgi/l/email-protection#04696560747174746d61776365696177446369656d682a676b693b7771666e61677039406168617061213634697d213634323321363456716a6a617621363460657065">EMAIL DELETION REQUEST ›</a>
+    <div class="hint">SUBJECT LINE IS PRE-FILLED FOR YOU</div>
+  </div>
+
+  <footer class="foot">
+    <div class="meme">YOUR SCORE WILL BE MISSED. YOU WON'T BE TRACKED.</div>
+  </footer>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
